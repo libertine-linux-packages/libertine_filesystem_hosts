@@ -11,9 +11,10 @@ libertine_compile_libertine_filesystem_hosts()
 	local destinationFolderPath="$(libertine_public_outputInitramfsPath)"/etc/hosts.d
 	
 	mkdir -m 0755 -p "$destinationFolderPath"
-	sed -i \
-		-e '/^$/d' \
-		-e '/^#/d' \
+	
+	sed \
+		-e 's/^\s*//g' \
+		"$(libertine_public_sourcePath)"/hosts \
 		"$(libertine_public_sourcePath)"/alternates/gambling-porn-social/hosts \
 		>"$destinationFolderPath"/libertine_filesystem_hosts.hosts
 }
